@@ -7,9 +7,6 @@
 
 import fs from "node:fs/promises";
 
-
-
-
 // -------------------
 // 1. FILE OPERATIONS
 // -------------------
@@ -62,6 +59,7 @@ await fs.writeFile("unique.txt", "Hello", {
 // ----------------------------
 // 2. DIRECTORY OPERATIONS
 // ----------------------------
+
 
 // 1. Create a directory safely if it doesn't exist
 await fs.mkdir("uploads", {
@@ -128,6 +126,7 @@ for await (const entry of dir) {
 // 3. FILE INFORMATION / METADATA
 // -------------------------------
 
+
 // Get file information
 const stats = await fs.stat("new.txt");
 
@@ -180,13 +179,11 @@ console.log({
   freeBlocks: filesystemStats.bfree,
 });
 
+
 // ---------------------------------
 // 4. FILE PERMISSIONS AND OWNERSHIP
 // ---------------------------------
 
-// =====================================================
-// FILE PERMISSIONS
-// =====================================================
 
 // 1. Owner can read/write; others can read
 await fs.chmod("data.txt", 0o644);
@@ -208,9 +205,11 @@ const now = new Date();
 
 await fs.utimes("data.txt", now, now);
 
+
 // ---------------------------------
 // 5. SYMBOLIC LINKS AND HARD LINKS
 // ---------------------------------
+
 
 // 1. Create a symbolic link
 await fs.symlink("data.txt", "data-link.txt");
@@ -232,8 +231,9 @@ const actualPath = await fs.realpath("data-link.txt");
 // 6. Delete a symbolic link
 await fs.unlink("data-link.txt");
 
+//----------------------------
 // 6. FILE HANDLE OPERATIONS
-
+//---------------------------
 
 // Open file
 const handle = await fs.open("new.txt", "r+");
@@ -414,9 +414,9 @@ console.log(path.resolve("uploads/image.png"));
 // Normalize path
 console.log(path.normalize("uploads/../data.txt"));
 
-
+//-----------------------
 // 12. ERROR HANDLING
-
+//-----------------------
 
 try {
   const content = await fs.readFile("unknown.txt", "utf8");
@@ -462,9 +462,9 @@ try {
   }
 }
 
-
+//-----------------------------------------
 // 13. MOST IMPORTANT METHODS TO REMEMBER
-
+//-----------------------------------------
 
 /*
 
