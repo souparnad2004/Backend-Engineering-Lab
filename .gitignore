@@ -1,0 +1,212 @@
+# ============================================================
+# .gitignore — Production-grade backend project
+# Node.js / TypeScript / pnpm
+# ============================================================
+
+# ------------------------------------------------------------
+# 1. Dependencies
+# ------------------------------------------------------------
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+.yarn/cache
+
+# pnpm store (workspace-level artifact)
+.pnpm-store/
+.pnpm-debug.log*
+
+# ------------------------------------------------------------
+# 2. Build outputs (never commit compiled artifacts)
+# ------------------------------------------------------------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.output/
+.vercel/
+.turbo/
+.parcel-cache/
+*.tsbuildinfo
+
+# ------------------------------------------------------------
+# 3. Environment variables & secrets  ⚠️ CRITICAL
+#    NOTE: .env.example / .env.sample ARE committed on purpose.
+# ------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+!.env.local.example
+
+# Private keys, certs, credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.der
+*.csr
+*.jks
+*.keystore
+*.secrets
+*.secret
+secrets/
+credentials.json
+service-account*.json
+google-credentials*.json
+aws-credentials
+.npmrc
+.netrc
+
+# ------------------------------------------------------------
+# 4. Logs
+# ------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------------------------------
+# 5. Caches
+# ------------------------------------------------------------
+.cache/
+.eslintcache
+.stylelintcache
+.rts2_cache_*/
+.nyc_output/
+.tmp/
+.temp/
+
+# TypeScript incremental compilation
+tsconfig.tsbuildinfo
+
+# Babel / SWC caches
+.babel-cache/
+*.swc
+
+# ------------------------------------------------------------
+# 6. Testing & coverage
+# ------------------------------------------------------------
+coverage/
+*.lcov
+htmlcov/
+.junit/
+test-results/
+playwright-report/
+playwright/.cache/
+blob-report/
+.vitest/
+
+# ------------------------------------------------------------
+# 7. Package manager files
+#    (lockfiles ARE committed: pnpm-lock.yaml stays tracked)
+# ------------------------------------------------------------
+# package-lock.json   # uncomment if using pnpm only
+# yarn.lock           # uncomment if using pnpm only
+# pnpm-lock.yaml      # committed — do NOT ignore
+
+# ------------------------------------------------------------
+# 8. IDEs & editors
+# ------------------------------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.settings/
+*.iml
+
+# ------------------------------------------------------------
+# 9. OS files
+# ------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ------------------------------------------------------------
+# 10. Databases & local data (if using local stores)
+# ------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+dump.rdb
+*.dump
+mongo-data/
+postgres-data/
+mysql-data/
+var/data/
+
+# ------------------------------------------------------------
+# 11. Runtime / uploads / media (user-generated, never commit)
+# ------------------------------------------------------------
+public/uploads/
+uploads/
+media/
+static/uploads/
+tmp/
+temp/
+var/cache/
+var/log/
+runtime/
+
+# ------------------------------------------------------------
+# 12. Docker / Vagrant / local infra
+# ------------------------------------------------------------
+docker-compose.override.yml
+.vagrant/
+*.box
+
+# ------------------------------------------------------------
+# 13. Serverless / IaC local state
+# ------------------------------------------------------------
+.serverless/
+.aws-sam/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!*.tfvars.example
+
+# ------------------------------------------------------------
+# 14. Debugging
+# ------------------------------------------------------------
+*.heapsnapshot
+chrome-debug.log
+debug.log
+
+# ------------------------------------------------------------
+# 15. Local misc
+# ------------------------------------------------------------
+*.bak
+*.backup
+*.orig
+*.rej
+node-repl-history
+.ercd
+.elixir_ls/
+

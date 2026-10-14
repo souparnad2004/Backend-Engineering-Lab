@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+
+    // --- File layout ---
+    "rootDir": "./src",                         // Single source root — keeps dist/ structure identical to src/
+    "outDir": "./dist",                         // Emit target — compiled .js/.d.ts/.map files land here
+
+    // --- Language & environment ---
+    "target": "ES2024",                         // JS version emitted — matches Node.js 22+ runtime (ES2024 features)
+    "lib": ["ES2024"],                          // Built-in type surface — ES only, no DOM (backend has no window/document)
+    "module": "nodenext",                       // Emit module format — follows Node ESM/CJS rules; with "type":"module" this means ESM
+    "moduleResolution": "nodenext",             // Import resolution — Node's real algorithm; relative imports must include file extensions
+    "moduleDetection": "force",                 // Treat every file as a module — prevents accidental cross-file global scope merging
+    "types": ["node"],                          // Globally injected type packages — Node globals: process, Buffer, __dirname, etc.
+    "resolveJsonModule": true,                  // Allow `import data from "./x.json"` — JSON becomes statically typed instead of fs.readFile
+
+    // --- Emit & debugging artifacts ---
+    "declaration": true,                        // Emit .d.ts files — consumers (and your future self) get type info
+    "declarationMap": true,                     // Emit .d.ts.map — "Go to Definition" jumps to your .ts source, not the .d.ts
+    "sourceMap": true,                          // Emit .js.map — production stack traces map back to TypeScript lines
+    "incremental": true,                        // Cache type info between runs — tsc --watch/build gets dramatically faster
+    "newLine": "lf",                            // Line endings in output — consistent across OSes, keeps git diffs clean
+
+    // --- Full strictness suite (strict itself flips on the core ~10 strict flags) ---
+    "strict": true,                             // Master strict switch — null checks, noImplicitAny, strictBindCallApply, etc.
+    "noUncheckedIndexedAccess": true,           // arr[0] is T | undefined — forces explicit handling of missing elements
+    "exactOptionalPropertyTypes": true,         // {a?: string} rejects explicit undefined — "optional" means truly absent
+    "noImplicitOverride": true,                 // `override` keyword required — catches accidental base-class member shadowing
+    "noImplicitReturns": true,                  // Every code path must return — no silent undefined at function end
+    "noUnusedLocals": true,                     // Unused local variables are errors — keeps modules clean
+    "noUnusedParameters": true,                 // Unused parameters are errors — prefix with _ to intentionally ignore
+    "noFallthroughCasesInSwitch": true,         // switch cases must break/return — prevents classic fallthrough bugs
+    "noPropertyAccessFromIndexSignature": true, // dict.foo forbidden when only [k: string] exists — forces dict["foo"]
+    "allowUnreachableCode": false,              // Dead code is an error — statements after return/throw are flagged
+    "allowUnusedLabels": false,                 // Unused labels are an error — no leftover debug labels
+
+    // --- ESM / bundler correctness (safe for Node, esbuild, swc, Vite) ---
+    "verbatimModuleSyntax": true,               // Type-only imports must use `import type` — runtime never ships dead type imports
+    "isolatedModules": true,                    // Each file transpiled standalone — required by esbuild/swc/Vite single-file transforms
+    "erasableSyntaxOnly": true,                 // Only erasable TS syntax — code stays runnable via Node type-stripping (no enums/namespaces/param props)
+    "noUncheckedSideEffectImports": true,       // `import "./x.js"` must resolve — catches broken style/asset imports at compile time
+    "esModuleInterop": true,                    // CommonJS interop — `import express from "express"` works as a default import
+
+    // --- Performance & cross-platform consistency ---
+    "skipLibCheck": true,                       // Don't type-check third-party .d.ts — major speed win with near-zero risk
+    "forceConsistentCasingInFileNames": true,   // Imports must match file casing exactly — avoids Linux-only build breaks
+
+    // --- Common toggles kept commented (uncomment only if you need them) ---
+    // "noEmit": true,                           // Type-check only, write nothing — use for a CI "typecheck" script
+    // "removeComments": true,                   // Strip comments from emitted JS (default keeps them)
+    // "allowImportingTsExtensions": true,       // Import with .ts extensions — only legal with noEmit or rewriteRelativeImportExtensions
+    // "rewriteRelativeImportExtensions": true,  // Rewrite .ts import specifiers to .js in output (TS 5.7+)
+    // "isolatedDeclarations": true,             // Require explicit return types everywhere — for very large monorepos only
+    // "composite": true,                        // Enable TS project references — monorepo/incremental-package builds only
+    // "baseUrl" / "paths"                      // Legacy path aliases — prefer Node package.json "imports" ("#/*") instead
+  },
+
+  // --- Files to compile ---
+  "include": ["src/**/*"],                      // Compile everything under src/
+  "exclude": ["node_modules", "dist", "coverage"] // Never compile dependencies, build output or coverage reports
+}
