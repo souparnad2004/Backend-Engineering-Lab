@@ -1,9 +1,13 @@
 import  express from "express";
+import os from "node:os"
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
+const instanceId = os.hostname();
 
 app.get("/users", (req, res) => {
     res.status(200).json([
@@ -15,6 +19,8 @@ app.get("/users", (req, res) => {
 app.get("/headers", (req, res) => {
     res.status(200).json({
         host:req.header("host"),
+
+        hostName: instanceId,
 
         realIp: req.header("x-real-ip"),
 
